@@ -26,8 +26,8 @@ class _MyHomePageState extends StatefulWidget {
 
 class _MyHomePageStateState extends State<_MyHomePageState> {
   bool isuser = false;
-  final List<String> chat = <String>['1','2','3','4','5'];
-
+  final List<String> chat = <String>[];
+  TextEditingController a = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +51,7 @@ class _MyHomePageStateState extends State<_MyHomePageState> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ListView.builder(
-                  //reverse: false,
+                  reverse: true,
                   itemCount: chat.length,
                   itemBuilder: (context, index){
                     return Row(
@@ -91,16 +91,19 @@ class _MyHomePageStateState extends State<_MyHomePageState> {
                     child: Padding(
                       padding: const EdgeInsets.all(4),
                       child: TextField(
-
+                        controller: a,
                       ),
                     ),
                     flex: 8,),
                   Expanded(
                     child: IconButton(
                       onPressed: (){
+                        a.text==''?setState((){
+                          isuser=false;
+                        }):
                         setState(() {
                           isuser=true;
-                          chat.add('new message');
+                          chat.insert(0,a.text);
                           print(isuser);
                         });
                       },
@@ -110,38 +113,6 @@ class _MyHomePageStateState extends State<_MyHomePageState> {
               ),
               flex: 1,)
           ],
-        ),
-        bottomNavigationBar: BottomAppBar( // 하단 바
-            height: 60, // 높이 60
-            child: Row( // 가로 정렬
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly, // 일정 간격을 두고 정렬
-                children: [
-                  IconButton(
-                      onPressed: (){
-                        //Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomePage(UserNum: widget.UserNum)));
-                      },
-                      icon: Icon(Icons.home_outlined)
-                  ),
-                  IconButton(
-                      onPressed: (){
-                        //Navigator.of(context).push(MaterialPageRoute(builder: (context) => MyApp(userNum: widget.UserNum)));
-                      },
-                      icon: Icon(Icons.event_note_outlined)
-                  ),
-                  IconButton(
-                      onPressed: (){
-
-                      },
-                      icon: Icon(Icons.chat_outlined, color: Colors.blue)
-                  ),
-                  IconButton(
-                      onPressed: (){
-                        //Navigator.of(context).push(MaterialPageRoute(builder: (context) => my_page(userNum: widget.UserNum)));
-                      },
-                      icon: Icon(Icons.list_alt_outlined)
-                  )
-                ]
-            )
         )
     );
   }
