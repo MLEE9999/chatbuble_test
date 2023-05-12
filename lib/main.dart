@@ -1,3 +1,5 @@
+import 'package:chat_test/calendar.dart';
+import 'package:chat_test/chat_test.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -34,84 +36,30 @@ class _MyHomePageStateState extends State<_MyHomePageState> {
         appBar: AppBar(
           automaticallyImplyLeading: false, // 뒤로가기 버튼 제거
           backgroundColor: Colors.white, // 상단 바 배경색을 흰색으로 설정
-          title: Text('ChatBot', style: TextStyle(color: Colors.grey)), // 상단 바 글자색을 검정색으로 설정
-          actions: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: OutlinedButton(
-                  onPressed: (){
-
-                  }, child: Text('채팅내역', style: TextStyle(color: Colors.black, fontSize: 20),)),
-            )
-          ],
+          title: Text('연습장', style: TextStyle(color: Colors.grey)), // 상단 바 글자색을 검정색으로 설정
         ),
         body: Column(
           children: [
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ListView.builder(
-                  reverse: true,
-                  itemCount: chat.length,
-                  itemBuilder: (context, index){
-                    return Row(
-                      mainAxisAlignment: isuser ? MainAxisAlignment.start : MainAxisAlignment.end,
-                      children: [
-                        Container(
-                            decoration: BoxDecoration(
-                                color: isuser ? Colors.green[100] : Colors.grey[300],
-                                borderRadius: BorderRadius.circular(8)
-                            ),child: Text('${chat[index]}',style: TextStyle(color: Colors.black),)
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              '${chat[index]}',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            SizedBox(height: 4.0),
-                            Text(
-                                '${chat[index]}'
-                            ),
-                          ],
-                        ),
-                      ],
-                    );
-                  },
-                ),
-              ),
-              flex: 9,),
+              child: Container(),flex: 3,
+            ),
             Expanded(
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(4),
-                      child: TextField(
-                        controller: a,
-                      ),
-                    ),
-                    flex: 8,),
-                  Expanded(
-                    child: IconButton(
-                      onPressed: (){
-                        a.text==''?setState((){
-                          isuser=false;
-                        }):
-                        setState(() {
-                          isuser=true;
-                          chat.insert(0,a.text);
-                          print(isuser);
-                        });
-                      },
-                      icon: Icon(Icons.arrow_back),),
-                  )
-                ],
+              child: TextButton(
+                onPressed: (){
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => chat_test()));
+                }, child: Text('채팅 창 연습',style: TextStyle(color: Colors.black),),
               ),
-              flex: 1,)
+            ),
+            Expanded(
+              child: TextButton(
+                onPressed: (){
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => calendar()));
+                }, child: Text('버튼 -> 캘린더 연습',style: TextStyle(color: Colors.black),),
+              ),
+            ),
+            Expanded(
+              child: Container(),flex: 3,
+            ),
           ],
         )
     );
