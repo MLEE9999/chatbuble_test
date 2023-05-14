@@ -1,6 +1,7 @@
 import 'package:chat_test/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 class calendar extends StatelessWidget {
   const calendar({Key? key}) : super(key: key);
@@ -8,6 +9,15 @@ class calendar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        const Locale('ko', 'KR'), // 한국어
+        const Locale('en', 'US'), // 영어
+      ],
       debugShowCheckedModeBanner: false,
       home: Calendar(),
     );
@@ -50,8 +60,10 @@ class _CalendarState extends State<Calendar> {
                   showDatePicker(
                       context: context,
                       initialDate: DateTime.now(),
-                      firstDate: DateTime(2000),
-                      lastDate: DateTime.now(),
+                      firstDate: DateTime(2020),
+                      lastDate: DateTime(2030),
+                      locale: const Locale('ko', 'KO'), // 한국어 설정
+                      helpText: '출산 예정일을 선택해주세요'
                   ).then((selectedDate){
                     setState((){
                       _selectedDate = selectedDate;
