@@ -15,6 +15,7 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   TextEditingController _textController = TextEditingController();
   List<ChatMessage> _messages = [];
+  ScrollController _scrollController = ScrollController();
 
   void _sendMessage() {
     setState(() {
@@ -23,12 +24,21 @@ class _ChatScreenState extends State<ChatScreen> {
       // 사용자가 입력한 메시지를 오른쪽에 출력
       _messages.add(ChatMessage(sender: "user", message: message));
 
-      // 입력한 메시지가 "Yes"일 경우 "Yes"라는 답변을 추가하여 왼쪽에 출력
-      if (message == "Yes") {
+      // 입력한 메시지 처리
+      if (message != null) {
+        //다이얼로그 플로우 처리 후 받게될 답변
         _messages.add(ChatMessage(sender: "bot", message: "Yes"));
       }
 
       _textController.clear();
+
+      WidgetsBinding.instance!.addPostFrameCallback((_) {
+        _scrollController.animateTo(
+          _scrollController.position.maxScrollExtent,
+          duration: Duration(milliseconds: 300),
+          curve: Curves.easeOut,
+        );
+      });
     });
   }
 
@@ -42,6 +52,7 @@ class _ChatScreenState extends State<ChatScreen> {
         children: [
           Expanded(
             child: ListView.builder(
+              controller: _scrollController,
               itemCount: _messages.length,
               itemBuilder: (BuildContext context, int index) {
                 ChatMessage chatMessage = _messages[index];
