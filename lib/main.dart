@@ -1,4 +1,5 @@
 import 'package:chat_test/calendar.dart';
+import 'package:chat_test/chat_screen.dart';
 import 'package:chat_test/chat_test.dart';
 import 'package:flutter/material.dart';
 
@@ -55,6 +56,13 @@ class _MyHomePageStateState extends State<_MyHomePageState> {
                 onPressed: (){
                   Navigator.of(context).push(MaterialPageRoute(builder: (context) => calendar()));
                 }, child: Text('버튼 -> 캘린더 연습',style: TextStyle(color: Colors.black),),
+              ),
+            ),
+            Expanded(
+              child: TextButton(
+                onPressed: (){
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => ChatScreen()));
+                }, child: Text('버튼 -> 챗',style: TextStyle(color: Colors.black),),
               ),
             ),
             Expanded(
