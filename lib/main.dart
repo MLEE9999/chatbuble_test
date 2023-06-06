@@ -1,6 +1,8 @@
 import 'package:chat_test/calendar.dart';
 import 'package:chat_test/chat_screen.dart';
 import 'package:chat_test/chat_test.dart';
+import 'package:chat_test/phone.dart';
+import 'package:chat_test/pw.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -63,6 +65,20 @@ class _MyHomePageStateState extends State<_MyHomePageState> {
                 onPressed: (){
                   Navigator.of(context).push(MaterialPageRoute(builder: (context) => ChatScreen()));
                 }, child: Text('버튼 -> 챗',style: TextStyle(color: Colors.black),),
+              ),
+            ),
+            Expanded(
+              child: TextButton(
+                onPressed: (){
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => ChangePw()));
+                }, child: Text('비밀번호변경',style: TextStyle(color: Colors.black),),
+              ),
+            ),
+            Expanded(
+              child: TextButton(
+                onPressed: (){
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => ChangePhone()));
+                }, child: Text('전화번호 변경',style: TextStyle(color: Colors.black),),
               ),
             ),
             Expanded(
